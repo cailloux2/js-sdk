@@ -667,7 +667,12 @@ Echo.API.Request = function(config) {
 		 * Specifies the number of seconds after which the onError callback
 		 * is called if the API request failed.
 		 */
-		"timeout": 30
+		"timeout": 30,
+		/**
+		 * @cfg {Array} [secureEndpoints]
+		 * List of endpoints which should always use https.
+		 */
+		"secureEndpoints": ["submit"]
 	}, function(key, value) {
 		return self._configNormalizers[key]
 			? self._configNormalizers[key].call(self, value)
@@ -691,8 +696,9 @@ Echo.API.Request.prototype._configNormalizers = {
 
 Echo.API.Request.prototype._isSecureRequest = function() {
 	var parts, secure = this.config.get("secure");
-	var re = /https|wss/;
 	if (secure) return secure;
+	if (!$.inArray(this.config.get("endpoint"), this.config.get("secureEndpoints"))) return true;
+	var re = /https|wss/;
 	parts = utils.parseURL(this.config.get("apiBaseURL"));
 	return re.test(window.location.protocol) || re.test(parts.scheme);
 };
