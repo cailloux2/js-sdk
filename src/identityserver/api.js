@@ -57,7 +57,7 @@ Echo.IdentityServer.API.Request = Echo.Utils.inherit(Echo.API.Request, function(
 		"submissionProxyURL": "{%=baseURLs.api.submissionproxy%}/v2/esp/activity",
 		/**
 		 * @cfg {Array} [secureEndpoints]
-		 * List of endpoints which should always use https.
+		 * @inheritdoc
 		 */
 		"secureEndpoints": ["whoami"]
 	}, config);

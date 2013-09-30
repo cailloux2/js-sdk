@@ -672,7 +672,7 @@ Echo.API.Request = function(config) {
 		 * @cfg {Array} [secureEndpoints]
 		 * List of endpoints which should always use https.
 		 */
-		"secureEndpoints": ["submit"]
+		"secureEndpoints": []
 	}, function(key, value) {
 		return self._configNormalizers[key]
 			? self._configNormalizers[key].call(self, value)
